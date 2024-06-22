@@ -10,7 +10,7 @@ public class Topic_01_Check_Environment {
     WebDriver driver;
 
     @Test
-    public void TC_01_Run_On_Firefox1() {
+    public void TC_01_Run_On_Firefox() {
         driver = new FirefoxDriver();
         driver.get("https://www.facebook.com/");
         driver.quit();
