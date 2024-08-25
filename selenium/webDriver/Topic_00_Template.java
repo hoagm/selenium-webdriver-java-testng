@@ -12,7 +12,6 @@ public class Topic_00_Template {
 
     // 1- Setup: OS/ Web/ Browser/ Data/ Page...
     WebDriver driver;
-
     @BeforeClass
     public void initialBrowser() {
         driver = new FirefoxDriver();
@@ -23,12 +22,12 @@ public class Topic_00_Template {
 
     // 2- Action/ Execute
     @Test
-    public void TC_01_Register () {
+    public void TC_01_ () {
 
 
     }
     @Test
-    public void TC_02_Login () {
+    public void TC_02_ () {
 
 
     }
