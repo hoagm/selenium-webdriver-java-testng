@@ -79,6 +79,8 @@ public class Topic_02_Selenium_Locator {
     @Test
     public void TC_05_Partial_Link_Text() {
         // có thể lấy hết toàn bộ text hoặc 1 phần - phần gốc là downloads (hay dùng)
+        // text ở trên UI- ko phải text dưới html
+        // vd: trên UI là "DIGITAL", html là "Digital" => giá trị tìm phải là "DIGITAL"
         driver.findElement(By.partialLinkText("Digital"));
         driver.findElement(By.partialLinkText("download"));
 
@@ -98,25 +100,30 @@ public class Topic_02_Selenium_Locator {
     @Test
     public void TC_07_Css() {
         // css có thể cover đc cả 6 loại ở trên
-        //cover id
-        driver.findElement(By.cssSelector("input#small-searchterms"));
-        driver.findElement(By.cssSelector("#small-searchterms"));
+        // cover id
+        // html: tagname-attribute-value
+        // css: tagname[attribute='value']
+
         driver.findElement(By.cssSelector("input[id='small-searchterms']"));
+        driver.findElement(By.cssSelector("#small-searchterms"));
+        driver.findElement(By.cssSelector("input#small-searchterms"));
 
         //class
-        driver.findElement(By.cssSelector("button.register-next-step-button"));
         driver.findElement(By.cssSelector("button[class='button-1 register-next-step-button']")); // = phải lấy hết toàn bộ
+        driver.findElement(By.cssSelector("button.register-next-step-button"));
+        driver.findElement(By.cssSelector(".register-next-step-button"));
 
         // name => name ko có kiểu viết tắt, phải viết toàn bộ
         driver.findElement(By.cssSelector("select[name='DateOfBirthDay']"));
 
         // linktext:  lấy hết toàn bộ
-        driver.findElement(By.cssSelector("a[href='/contactus']"));
         driver.findElement(By.cssSelector("a[href='/register?returnUrl=%2Fregister']"));
-
-
-        /* partial link: href* là lấy 1 phần */
+        // partial link: href* là lấy 1 phần bất kỳ dùng *
         driver.findElement(By.cssSelector("a[href*='login?']"));
+        // lấy ở cuối dùng $
+        driver.findElement(By.cssSelector("a[href$='Fregister']"));
+
+
 
         //
         driver.findElement(By.cssSelector("a"));
@@ -126,6 +133,8 @@ public class Topic_02_Selenium_Locator {
     }
     @Test
     public void TC_08_XPath() {
+        // XPath: //tagname[@attribute='value']
+
         driver.findElement(By.xpath("//input[@id='small-searchterms']"));
         driver.findElement(By.xpath("//button[@class='button-1 register-next-step-button']"));
         driver.findElement(By.xpath("//button[contains(@class,'register-next-step-button')]"));
@@ -133,9 +142,9 @@ public class Topic_02_Selenium_Locator {
 
         driver.findElement(By.xpath("//select[@name='DateOfBirthDay']"));
 
-        driver.findElement(By.xpath("//a[text()='Register']"));
-        driver.findElement(By.xpath("//a[contains(text(),'Shipping')]"));
-        driver.findElement(By.xpath("//a[contains(text(),'& returns')]"));
+        driver.findElement(By.xpath("//a[@text()='Register']"));
+        driver.findElement(By.xpath("//a[@contains(text(),'Shipping')]"));
+        driver.findElement(By.xpath("//a[@contains(text(),'& returns')]"));
 
         driver.findElement(By.xpath("//a"));
         driver.findElement(By.xpath("//button"));
