@@ -25,7 +25,6 @@ public class Topic_02_Selenium_Locator_Homework {
     }
     @Test
     public void TC_02_Class () {
-        // Class sẽ ko lấy hết toàn bộ giá trị nếu có khoảng trắng => chỉ lấy 1 class duy nhất
         driver.findElement(By.className("posrelative"));
     }
     @Test
@@ -34,13 +33,11 @@ public class Topic_02_Selenium_Locator_Homework {
     }
     @Test
     public void TC_04_LinkText() {
-        // chỉ làm việc vs element và link có text
         driver.findElement(By.linkText("Đăng Ký"));
 
     }
     @Test
     public void TC_05_Partial_Link_Text() {
-        // có thể lấy hết toàn bộ text hoặc 1 phần - phần gốc là downloads (hay dùng)
         driver.findElement(By.partialLinkText("Đăng"));
 
 
@@ -48,8 +45,6 @@ public class Topic_02_Selenium_Locator_Homework {
     }
     @Test
     public void TC_06_Tagname()  {
-        // Khi mình muốn tìm tất cả các element giống nhau (thẻ của component giống nhau)
-        // Tất cả các textbox / button
         int linkNumber = driver.findElements(By.tagName("a")).size();
         System.out.println("tong so link" + linkNumber);
 
