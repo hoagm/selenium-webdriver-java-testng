@@ -134,6 +134,8 @@ public class Topic_02_Selenium_Locator {
     @Test
     public void TC_08_XPath() {
         // XPath: //tagname[@attribute='value']
+        // lấy thuộc tính dùng @
+        // lấy hàm thì bỏ @ dùng () - ví dụ text
 
         driver.findElement(By.xpath("//input[@id='small-searchterms']"));
         driver.findElement(By.xpath("//button[@class='button-1 register-next-step-button']"));
@@ -151,7 +153,20 @@ public class Topic_02_Selenium_Locator {
 
     }
 
+    @Test
+    public void TC_09_Relative_Locator() {
+        // element/ By A
 
+        // element/ By B
+
+        // element/ By C
+
+        // element/ By D
+
+        // element/ By E
+
+
+    }
     // 3- Clean
     @AfterClass
     public void cleanBrowser() {

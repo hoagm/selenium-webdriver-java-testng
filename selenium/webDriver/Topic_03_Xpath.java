@@ -7,7 +7,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class Topic_02_Selenium_Locator_Homework {
+public class Topic_03_Xpath {
 
     // 1- Setup: OS/ Web/ Browser/ Data/ Page...
     WebDriver driver;
