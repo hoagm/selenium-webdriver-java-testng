@@ -121,11 +121,6 @@ public class Topic_04_Register {
         Assert.assertEquals(driver.findElement(By.id("txtPhone-error")).getText(),"Vui lòng nhập con số");
 
     }
-    @Test
-    public void Register_02_ () {
-
-
-    }
 
     // 3- Clean
     @AfterClass
