@@ -126,7 +126,7 @@ public class Topic_04_Register {
     @AfterClass
     public void cleanBrowser() {
 
-        driver.quit();
+//        driver.quit();
     }
 
 }
