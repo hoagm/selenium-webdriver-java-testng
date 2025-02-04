@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class Topic_07_Browser_Element {
+public class Topic_07_Browser_Excercise {
 
     // 1- Setup: OS/ Web/ Browser/ Data/ Page...
     WebDriver driver;
@@ -28,7 +28,7 @@ public class Topic_07_Browser_Element {
     @Test
     public void TC_01_Page_URL () {
         driver.get("https://live.techpanda.org/");
-        
+
         //click My account in footer
         driver.findElement(By.cssSelector("div.footer a[title='My Account']")).click();
 
@@ -41,7 +41,7 @@ public class Topic_07_Browser_Element {
         Assert.assertEquals(driver.getCurrentUrl(), "https://live.techpanda.org/index.php/customer/account/login/");
 
         driver.findElement(By.xpath("//a[@title='Create an Account']")).click();
-
+//
         Assert.assertEquals(driver.getCurrentUrl(), "https://live.techpanda.org/index.php/customer/account/create/");
 
 
@@ -82,13 +82,15 @@ public class Topic_07_Browser_Element {
 
     }
 
+    @Test
     public void TC_04_Page_Source () {
         driver.get("https://live.techpanda.org/");
+
 
         driver.findElement(By.cssSelector("div.footer a[title=\"My Account\"]")).click();
 
         // tuong doi = assertTrue/False
-        Assert.assertTrue(driver.getPageSource().contains("Login or Create Account"));
+        Assert.assertTrue(driver.getPageSource().contains("Login or Create an Account"));
 
 
     }
