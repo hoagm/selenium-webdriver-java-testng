@@ -3,6 +3,7 @@ package webDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -34,8 +35,8 @@ public class Topic_08_Element_Excercise {
             System.out.println("Email textbox is not Display");
         }
 
-        if (driver.findElement(By.cssSelector("input#edu")).isDisplayed()) {
-            driver.findElement(By.cssSelector("input#edu")).sendKeys("edu");
+        if (driver.findElement(By.cssSelector("textarea#edu")).isDisplayed()) {
+            driver.findElement(By.cssSelector("textarea#edu")).sendKeys("edu");
             System.out.println("Education is display");
         }else {
             System.out.println("Education is not display");
@@ -65,8 +66,8 @@ public class Topic_08_Element_Excercise {
             System.out.println("Email textbox is not Display");
         }
 
-        if (driver.findElement(By.cssSelector("input#edu")).isDisplayed()) {
-            driver.findElement(By.cssSelector("input#edu")).sendKeys("edu");
+        if (driver.findElement(By.cssSelector("textarea#edu")).isEnabled()) {
+            driver.findElement(By.cssSelector("textarea#edu")).sendKeys("edu");
             System.out.println("Education is display");
         }else {
             System.out.println("Education is not display");
@@ -98,8 +99,8 @@ public class Topic_08_Element_Excercise {
             System.out.println("Email textbox is not isEnabled");
         }
 
-        if (driver.findElement(By.cssSelector("input#edu")).isEnabled()) {
-            driver.findElement(By.cssSelector("input#edu")).sendKeys("edu");
+        if (driver.findElement(By.cssSelector("textarea#edu")).isEnabled()) {
+            driver.findElement(By.cssSelector("textarea#edu")).sendKeys("edu");
             System.out.println("Education is isEnabled");
         }else {
             System.out.println("Education is not isEnabled");
@@ -131,10 +132,46 @@ public class Topic_08_Element_Excercise {
             System.out.println("Job role 1 is not isEnabled");
         }
 
-        if (driver.findElement(By.xpath("//h5[text()='Name: User5']")).isDisplayed()) {
-            System.out.println("Name user text 5 is display");
+        if (driver.findElement(By.xpath("//h5[text()='Name: User5']")).isEnabled()) {
+            System.out.println("Name user text 5 is isEnabled");
         }else {
-            System.out.println("Name user text 5 is not display");
+            System.out.println("Name user text 5 is not isEnabled");
+        }
+
+        if (driver.findElement(By.cssSelector("#slider-1")).isEnabled()) {
+            System.out.println("Slider 1 is isEnabled");
+        }else {
+            System.out.println("Slider 1 is not isEnabled");
+        }
+
+        if (driver.findElement(By.cssSelector("#disable_password")).isEnabled()) {
+            System.out.println("Password is isEnabled");
+        }else {
+            System.out.println("Password is not isEnabled");
+        }
+
+        if (driver.findElement(By.cssSelector("#radio-disabled")).isEnabled()) {
+            System.out.println("Radio button is isEnabled");
+        }else {
+            System.out.println("Radio button is not isEnabled");
+        }
+
+        if (driver.findElement(By.cssSelector("select#job3")).isEnabled()) {
+            System.out.println("Select job is display");
+        }else {
+            System.out.println("Select job is not display");
+        }
+
+        if (driver.findElement(By.xpath("//textarea[@id='bio']")).isEnabled()) {
+            System.out.println("Biograph is display");
+        }else {
+            System.out.println("Biograph is not display");
+        }
+
+        if (driver.findElement(By.xpath("//input[@id='check-disbaled']")).isEnabled()) {
+            System.out.println("Interested check is display");
+        }else {
+            System.out.println("Interested check not display");
         }
 
 
@@ -142,9 +179,112 @@ public class Topic_08_Element_Excercise {
     }
 
     @Test
-    public void TC_04_Page_Source () {
-        driver.get("https://automationfc.github.io/basic-form/index.html");
+    public void TC_04_MailChimp_validate () throws InterruptedException {
+        driver.get("https://login.mailchimp.com/signup/");
 
+        driver.findElement(By.cssSelector("input#email")).sendKeys("autotest@gmail.net");
+        driver.findElement(By.cssSelector("button#create-account-enabled")).click();
+        Thread.sleep(3000);
+
+        //empty
+        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='lowercase-char not-completed']")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='uppercase-char not-completed']")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='number-char not-completed']")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='special-char not-completed']")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='8-char not-completed']")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='username-check not-completed']")).isDisplayed());
+
+        // lowercase
+        driver.findElement(By.cssSelector("input#new_password")).sendKeys("sele");
+        driver.findElement(By.cssSelector("button#create-account-enabled")).click();
+        Thread.sleep(3000);
+
+        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='lowercase-char completed']")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='uppercase-char not-completed']")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='number-char not-completed']")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='special-char not-completed']")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='8-char not-completed']")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='username-check completed']")).isDisplayed());
+
+        // uppercase
+        driver.findElement(By.cssSelector("input#new_password")).clear();
+        driver.findElement(By.cssSelector("input#new_password")).sendKeys("SELE");
+//        driver.findElement(By.cssSelector("button#create-account-enabled")).click();
+        Thread.sleep(3000);
+
+        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='lowercase-char not-completed']")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='uppercase-char completed']")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='number-char not-completed']")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='special-char not-completed']")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='8-char not-completed']")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='username-check completed']")).isDisplayed());
+
+//        Specialcase
+        driver.findElement(By.cssSelector("input#new_password")).clear();
+        driver.findElement(By.cssSelector("input#new_password")).sendKeys("!!@#");
+//        driver.findElement(By.cssSelector("button#create-account-enabled")).click();
+        Thread.sleep(3000);
+
+        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='lowercase-char not-completed']")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='uppercase-char not-completed']")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='number-char not-completed']")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='special-char completed']")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='8-char not-completed']")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='username-check completed']")).isDisplayed());
+
+
+        // Number case
+        driver.findElement(By.cssSelector("input#new_password")).clear();
+        driver.findElement(By.cssSelector("input#new_password")).sendKeys("1234567");
+//        driver.findElement(By.cssSelector("button#create-account-enabled")).click();
+        Thread.sleep(3000);
+
+        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='lowercase-char not-completed']")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='uppercase-char not-completed']")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='number-char completed']")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='special-char not-completed']")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='8-char not-completed']")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='username-check completed']")).isDisplayed());
+
+//        // contain username
+//        driver.findElement(By.cssSelector("input#new_password")).clear();
+//        driver.findElement(By.cssSelector("input#new_password")).sendKeys("auto");
+//        driver.findElement(By.cssSelector("button#create-account-enabled")).click();
+//        Thread.sleep(3000);
+//
+//        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='lowercase-char completed']")).isDisplayed());
+//        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='uppercase-char not-completed']")).isDisplayed());
+//        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='number-char not-completed']")).isDisplayed());
+//        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='special-char not-completed']")).isDisplayed());
+//        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='8-char not-completed']")).isDisplayed());
+//        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='username-check not-completed']")).isDisplayed());
+//
+//        // 8 character
+//        driver.findElement(By.cssSelector("input#new_password")).clear();
+//        driver.findElement(By.cssSelector("input#new_password")).sendKeys("automation");
+//        driver.findElement(By.cssSelector("button#create-account-enabled")).click();
+//        Thread.sleep(3000);
+//
+//        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='lowercase-char completed']")).isDisplayed());
+//        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='uppercase-char not-completed']")).isDisplayed());
+//        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='number-char not-completed']")).isDisplayed());
+//        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='special-char not-completed']")).isDisplayed());
+//        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='8-char completed']")).isDisplayed());
+//        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='username-check completed']")).isDisplayed());
+//        Thread.sleep(3000);
+//
+//        // Full
+//        driver.findElement(By.cssSelector("input#new_password")).clear();
+//        driver.findElement(By.cssSelector("input#new_password")).sendKeys("Abc!1234");
+//        driver.findElement(By.cssSelector("button#create-account-enabled")).click();
+//        Thread.sleep(3000);
+//
+//        Assert.assertFalse(driver.findElement(By.cssSelector("li[class='lowercase-char completed']")).isDisplayed());
+//        Assert.assertFalse(driver.findElement(By.cssSelector("li[class='uppercase-char completed']")).isDisplayed());
+//        Assert.assertFalse(driver.findElement(By.cssSelector("li[class='number-char completed']")).isDisplayed());
+//        Assert.assertFalse(driver.findElement(By.cssSelector("li[class='special-char completed']")).isDisplayed());
+//        Assert.assertFalse(driver.findElement(By.cssSelector("li[class='8-char completed']")).isDisplayed());
+//        Assert.assertFalse(driver.findElement(By.cssSelector("li[class='username-check completed']")).isDisplayed());
 
     }
 
@@ -159,7 +299,7 @@ public class Topic_08_Element_Excercise {
     // 3- Clean
     @AfterClass
     public void cleanBrowser() {
-        driver.quit();
+//        driver.quit();
     }
 
 }

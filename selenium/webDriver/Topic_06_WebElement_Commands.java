@@ -1,5 +1,4 @@
 package webDriver;
-
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.logging.LogType;
@@ -11,8 +10,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
 
-public class Topic_06_Element_Commands {
-
+public class Topic_06_WebElement_Commands {
     // 1- Setup: OS/ Web/ Browser/ Data/ Page...
     WebDriver driver;
 
@@ -123,7 +121,7 @@ public class Topic_06_Element_Commands {
         element.getScreenshotAs(OutputType.FILE); // lưu dưới dạng file trong ổ cứng
         element.getScreenshotAs(OutputType.BASE64); // ưu điểm nhẹ, rất nhej
 
-        element.
+//        element.
 
 
     }
@@ -138,5 +136,4 @@ public class Topic_06_Element_Commands {
     public void cleanBrowser() {
         driver.quit();
     }
-
 }
