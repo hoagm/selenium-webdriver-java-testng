@@ -2,6 +2,7 @@ package webDriver;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -14,7 +15,7 @@ public class Topic_09_Login {
     WebDriver driver;
     @BeforeClass
     public void initialBrowser() {
-        driver = new FirefoxDriver();
+        driver = new ChromeDriver();
 
         driver.get("https://live.techpanda.org/index.php/");
 
@@ -35,7 +36,7 @@ public class Topic_09_Login {
         driver.findElement(By.cssSelector("input#email")).sendKeys("123434234@1234.1234");
         driver.findElement(By.cssSelector("input#pass")).sendKeys("123456");
         driver.findElement(By.cssSelector("button#send2")).click();
-        Assert.assertEquals(driver.findElement(By.cssSelector("div#advice-required-entry-email")).getText(),"Please enter a valid email address. For example johndoe@domain.com.");
+        Assert.assertEquals(driver.findElement(By.cssSelector("div#advice-validate-email-email")).getText(),"Please enter a valid email address. For example johndoe@domain.com.");
 
     }
 

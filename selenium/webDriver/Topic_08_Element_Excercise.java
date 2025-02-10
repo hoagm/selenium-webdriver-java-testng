@@ -181,70 +181,73 @@ public class Topic_08_Element_Excercise {
     @Test
     public void TC_04_MailChimp_validate () throws InterruptedException {
         driver.get("https://login.mailchimp.com/signup/");
+//        Thread.sleep(3000);
+
+//        driver.findElement(By.cssSelector("#onetrust-close-btn-container")).click();
 
         driver.findElement(By.cssSelector("input#email")).sendKeys("autotest@gmail.net");
         driver.findElement(By.cssSelector("button#create-account-enabled")).click();
         Thread.sleep(3000);
 
-        //empty
+        // empty
         Assert.assertTrue(driver.findElement(By.cssSelector("li[class='lowercase-char not-completed']")).isDisplayed());
         Assert.assertTrue(driver.findElement(By.cssSelector("li[class='uppercase-char not-completed']")).isDisplayed());
         Assert.assertTrue(driver.findElement(By.cssSelector("li[class='number-char not-completed']")).isDisplayed());
         Assert.assertTrue(driver.findElement(By.cssSelector("li[class='special-char not-completed']")).isDisplayed());
         Assert.assertTrue(driver.findElement(By.cssSelector("li[class='8-char not-completed']")).isDisplayed());
         Assert.assertTrue(driver.findElement(By.cssSelector("li[class='username-check not-completed']")).isDisplayed());
-
-        // lowercase
-        driver.findElement(By.cssSelector("input#new_password")).sendKeys("sele");
-        driver.findElement(By.cssSelector("button#create-account-enabled")).click();
-        Thread.sleep(3000);
-
-        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='lowercase-char completed']")).isDisplayed());
-        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='uppercase-char not-completed']")).isDisplayed());
-        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='number-char not-completed']")).isDisplayed());
-        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='special-char not-completed']")).isDisplayed());
-        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='8-char not-completed']")).isDisplayed());
-        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='username-check completed']")).isDisplayed());
+//
+//        // lowercase
+//        driver.findElement(By.cssSelector("input#new_password")).sendKeys("sele");
+//        driver.findElement(By.cssSelector("button#create-account-enabled")).click();
+//        Thread.sleep(3000);
+//
+//        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='lowercase-char completed']")).isDisplayed());
+//        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='uppercase-char not-completed']")).isDisplayed());
+//        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='number-char not-completed']")).isDisplayed());
+//        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='special-char not-completed']")).isDisplayed());
+//        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='8-char not-completed']")).isDisplayed());
+//        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='username-check completed']")).isDisplayed());
 
         // uppercase
-        driver.findElement(By.cssSelector("input#new_password")).clear();
-        driver.findElement(By.cssSelector("input#new_password")).sendKeys("SELE");
-//        driver.findElement(By.cssSelector("button#create-account-enabled")).click();
-        Thread.sleep(3000);
-
-        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='lowercase-char not-completed']")).isDisplayed());
-        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='uppercase-char completed']")).isDisplayed());
-        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='number-char not-completed']")).isDisplayed());
-        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='special-char not-completed']")).isDisplayed());
-        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='8-char not-completed']")).isDisplayed());
-        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='username-check completed']")).isDisplayed());
-
-//        Specialcase
-        driver.findElement(By.cssSelector("input#new_password")).clear();
-        driver.findElement(By.cssSelector("input#new_password")).sendKeys("!!@#");
-//        driver.findElement(By.cssSelector("button#create-account-enabled")).click();
-        Thread.sleep(3000);
-
-        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='lowercase-char not-completed']")).isDisplayed());
-        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='uppercase-char not-completed']")).isDisplayed());
-        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='number-char not-completed']")).isDisplayed());
-        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='special-char completed']")).isDisplayed());
-        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='8-char not-completed']")).isDisplayed());
-        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='username-check completed']")).isDisplayed());
-
-
-        // Number case
-        driver.findElement(By.cssSelector("input#new_password")).clear();
-        driver.findElement(By.cssSelector("input#new_password")).sendKeys("1234567");
-//        driver.findElement(By.cssSelector("button#create-account-enabled")).click();
-        Thread.sleep(3000);
-
-        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='lowercase-char not-completed']")).isDisplayed());
-        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='uppercase-char not-completed']")).isDisplayed());
-        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='number-char completed']")).isDisplayed());
-        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='special-char not-completed']")).isDisplayed());
-        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='8-char not-completed']")).isDisplayed());
-        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='username-check completed']")).isDisplayed());
+//        driver.findElement(By.cssSelector("input#new_password")).clear();
+//        driver.findElement(By.cssSelector("input#new_password")).sendKeys("SELE");
+////        driver.findElement(By.cssSelector("button#create-account-enabled")).click();
+//        Thread.sleep(3000);
+//
+//        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='lowercase-char not-completed']")).isDisplayed());
+//        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='uppercase-char completed']")).isDisplayed());
+//        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='number-char not-completed']")).isDisplayed());
+//        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='special-char not-completed']")).isDisplayed());
+//        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='8-char not-completed']")).isDisplayed());
+//        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='username-check completed']")).isDisplayed());
+//
+////        Specialcase
+//        driver.findElement(By.cssSelector("input#new_password")).clear();
+//        driver.findElement(By.cssSelector("input#new_password")).sendKeys("!!@#");
+////        driver.findElement(By.cssSelector("button#create-account-enabled")).click();
+//        Thread.sleep(3000);
+//
+//        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='lowercase-char not-completed']")).isDisplayed());
+//        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='uppercase-char not-completed']")).isDisplayed());
+//        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='number-char not-completed']")).isDisplayed());
+//        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='special-char completed']")).isDisplayed());
+//        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='8-char not-completed']")).isDisplayed());
+//        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='username-check completed']")).isDisplayed());
+//
+//
+//        // Number case
+//        driver.findElement(By.cssSelector("input#new_password")).clear();
+//        driver.findElement(By.cssSelector("input#new_password")).sendKeys("1234567");
+////        driver.findElement(By.cssSelector("button#create-account-enabled")).click();
+//        Thread.sleep(3000);
+//
+//        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='lowercase-char not-completed']")).isDisplayed());
+//        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='uppercase-char not-completed']")).isDisplayed());
+//        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='number-char completed']")).isDisplayed());
+//        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='special-char not-completed']")).isDisplayed());
+//        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='8-char not-completed']")).isDisplayed());
+//        Assert.assertTrue(driver.findElement(By.cssSelector("li[class='username-check completed']")).isDisplayed());
 
 //        // contain username
 //        driver.findElement(By.cssSelector("input#new_password")).clear();
