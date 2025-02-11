@@ -15,7 +15,9 @@ public class Topic_09_Login {
     WebDriver driver;
     @BeforeClass
     public void initialBrowser() {
-        driver = new ChromeDriver();
+        driver = new FirefoxDriver();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+        driver.manage().window().maximize();
 
         driver.get("https://live.techpanda.org/index.php/");
 
