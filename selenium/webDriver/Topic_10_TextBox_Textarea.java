@@ -2,6 +2,7 @@ package webDriver;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -16,7 +17,7 @@ public class Topic_10_TextBox_Textarea {
     WebDriver driver;
     @BeforeClass
     public void initialBrowser() {
-        driver = new FirefoxDriver();
+        driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
         driver.manage().window().maximize();
 
@@ -58,6 +59,7 @@ public class Topic_10_TextBox_Textarea {
     // 3- Clean
     @AfterClass
     public void cleanBrowser() {
+
         driver.quit();
     }
 
