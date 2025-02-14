@@ -2,23 +2,34 @@ package webDriver;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Topic_10_TextBox_Textarea {
+public class Topic_11_Default_Dropdown {
 
     // 1- Setup: OS/ Web/ Browser/ Data/ Page...
     WebDriver driver;
+    Select select;
+
     @BeforeClass
     public void initialBrowser() {
-        driver = new ChromeDriver();
+
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-geolocation");
+        driver = new ChromeDriver(options);
+
+
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
         driver.manage().window().maximize();
 
@@ -27,126 +38,41 @@ public class Topic_10_TextBox_Textarea {
 
     // 2- Action/ Execute
     @Test
-    public void TC_01_Textbox () {
-        driver.get("http://live.techpanda.org/");
+    public void TC_01_ () throws InterruptedException {
+        driver.get("https://egov.danang.gov.vn/reg");
+        select = new Select(driver.findElement(By.cssSelector("select#thuongtru_tinhthanh")));
+        select.selectByVisibleText("thành phố Hà Nội");
+        Thread.sleep(3000);
 
-        driver.findElement(By.cssSelector("div.footer [title='My Account']")).click();
+        // lấy ra item vừa chọn và verify
+        Assert.assertEquals(select.getFirstSelectedOption().getText(),"thành phố Hà Nội");
 
-        driver.findElement(By.cssSelector("a[title='Create an Account']")).click();
+        // kiểm tra 1 dropdown là single hay multiple
 
-        String firstName = "Donal";
-        String lastName = "Trump";
-        String email = "donaltrump" + new Random().nextInt(999) + "@gmail.net";
-        String password = "1234567";
-
-        // nếu chuyền vào ngoặc "" ("firstName") thì sẽ được hiểu là 1 chuỗi chứ ko phải là 1 biến
-        driver.findElement(By.id("firstname")).sendKeys(firstName);
-        driver.findElement(By.id("lastname")).sendKeys(lastName);
-        driver.findElement(By.id("email_address")).sendKeys(email);
-        driver.findElement(By.id("password")).sendKeys(password);
-        driver.findElement(By.id("confirmation")).sendKeys(password);
-
-        driver.findElement(By.cssSelector("button[title='Register']")).click();
+        Assert.assertFalse(select.isMultiple());
 
 
 
 
     }
+    @Test
+    public void TC_02_ () {
+        driver.get("https://demo.nopcommerce.com/");
+        driver.findElement(By.cssSelector("a.ico-register")).click();
+
+    }
 
     @Test
-    public void TC_02_OrangeHRM () throws InterruptedException {
-        // step1
-        driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+    public void TC_03_Dropdown_List2 () throws InterruptedException {
+        driver.get("https://rode.com/en/support/where-to-buy");
 
-        String firstName = "Donal";
-        String lastName = "Trump";
-        String password = "a1234567";
-        String number = "4123-" + new Random().nextInt(9999) + "-2850";
-        String userName = "donal" + new Random().nextInt(9999);
-        String passportNumber = "2433-4558-3294-1123";
-        String passportComment = "this data test\nautomation Fc";
-
-        // step2
-        driver.findElement(By.cssSelector("input[name='username']")).sendKeys("Admin");
-        driver.findElement(By.cssSelector("input[name='password']")).sendKeys("admin123");
-        driver.findElement(By.cssSelector("button.orangehrm-login-button")).click();
-        Thread.sleep(4000);
-
-        // step3
-        driver.findElement(By.xpath("//span[text()='PIM']/parent::a")).click();
-
-        // step 4
-        driver.findElement(By.xpath("//a[text()='Add Employee']")).click();
-
-        //step 5
-        driver.findElement(By.cssSelector("input.orangehrm-firstname")).sendKeys(firstName);
-        driver.findElement(By.cssSelector("input.orangehrm-lastname")).sendKeys(lastName);
-
-        String empID = driver.findElement(By.xpath("//label[text()='Employee Id']/parent::div/following-sibling::div/input")).getAttribute("value");
-
-        driver.findElement(By.cssSelector("span.oxd-switch-input']")).click();
-        Thread.sleep(3000);
-        driver.findElement(By.xpath("//label[text()='Username']/parent::div/following-sibling::div/input")).sendKeys(userName);
-        driver.findElement(By.xpath("//label[text()='Password']/parent::div/following-sibling::div/input")).sendKeys(password);
-        driver.findElement(By.xpath("//label[text()='Confirm Password']/parent::div/following-sibling::div/input")).sendKeys(password);
-
-        // step 6
-        driver.findElement(By.cssSelector("button[class='oxd-button oxd-button--medium oxd-button--secondary orangehrm-left-space']")).click();
-        Thread.sleep(4000);
-
-        // step 7
-        Assert.assertEquals(driver.findElement(By.cssSelector("input[class='oxd-input oxd-input--active orangehrm-firstname']")).getAttribute("value"),firstName);
-        Assert.assertEquals(driver.findElement(By.cssSelector("input[class='oxd-input oxd-input--active orangehrm-lastname']")).getAttribute("value"),lastName);
-        Assert.assertEquals(driver.findElement(By.xpath("//label[text()='Employee Id']/parent::div/following-sibling::div/input")).getAttribute("value"),empID);
-
-        // step 8
-        driver.findElement(By.xpath("//a[text()='Immigration']")).click();
-        Thread.sleep(2000);
-
-        // step 9
-        driver.findElement(By.xpath("//h6[text()='Assigned Immigration Records']/following-sibling::button")).click();
-
-        // step 10
-        driver.findElement(By.xpath("//label[text()='Number']/parent::div/following-sibling::div/input")).sendKeys(passportNumber);
-        driver.findElement(By.cssSelector("textarea[class='oxd-textarea oxd-textarea--active oxd-textarea--resize-vertical']")).sendKeys(passportComment);
-        driver.findElement(By.xpath("button[class='oxd-button oxd-button--medium oxd-button--secondary orangehrm-left-space']")).click();
+        new Select(driver.findElement(By.cssSelector("select#country"))).selectByVisibleText("Vietnam");
         Thread.sleep(3000);
 
-        // step 11
-        driver.findElement(By.cssSelector("i[class='oxd-icon bi-pencil-fill']")).click();
-        Thread.sleep(2000);
-
-        // step 12
-        Assert.assertEquals(driver.findElement(By.xpath("//label[text()='Number']/parent::div/following-sibling::div/input")).getAttribute("value"),passportNumber);
-        Assert.assertEquals(driver.findElement(By.cssSelector("textarea[class='oxd-textarea oxd-textarea--active oxd-textarea--resize-vertical']")).getAttribute("value"),passportComment);
-
-        // step 14
-        driver.findElement(By.id(".oxd-userdropdown")).click();
-        Thread.sleep(2000);
-        driver.findElement(By.xpath("//a[text()='Logout']")).click();
-        Thread.sleep(2000);
+        driver.findElement(By.cssSelector("input#map_search_query")).sendKeys("Ho Chi Minh");
+        driver.findElement(By.cssSelector("button[class='btn btn-default']")).click();
 
 
-        // step 15
-        driver.findElement(By.cssSelector("input.orangehrm-firstname")).sendKeys(userName);
-        driver.findElement(By.cssSelector("input.orangehrm-lastname")).sendKeys(password);
-
-        // step 16
-        driver.findElement(By.xpath("//span[text()='My Info']/parent::a/parent::li")).click();
-        Thread.sleep(3000);
-
-        // step 17
-        Assert.assertEquals(driver.findElement(By.cssSelector("input.orangehrm-firstname")).getAttribute("value"),firstName);
-        Assert.assertEquals(driver.findElement(By.cssSelector("input.orangehrm-lastname")).getAttribute("value"),lastName);
-        Assert.assertEquals(driver.findElement(By.xpath("//label[text()='Employee Id']/parent::div/following-sibling::div/input")).getAttribute("value"),passportNumber);
-
-        // step 18
-        driver.findElement(By.xpath("//a[text()='Immigration']")).click();
-        driver.findElement(By.cssSelector("i[class='oxd-icon bi-pencil-fill']")).click();
-
-        // step 19
-        Assert.assertEquals(driver.findElement(By.xpath("//label[text()='Number']/parent::div/following-sibling::div/input")).getAttribute("value"),passportNumber);
-        Assert.assertEquals(driver.findElement(By.cssSelector("textarea[class='oxd-textarea oxd-textarea--active oxd-textarea--resize-vertical']")).getAttribute("value"),passportComment);
 
 
     }
@@ -154,7 +80,6 @@ public class Topic_10_TextBox_Textarea {
     // 3- Clean
     @AfterClass
     public void cleanBrowser() {
-
         driver.quit();
     }
 
