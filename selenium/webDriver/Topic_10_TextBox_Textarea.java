@@ -133,6 +133,20 @@ public class Topic_10_TextBox_Textarea {
 
         // step 16
         driver.findElement(By.xpath("//span[text()='My Info']/parent::a/parent::li")).click();
+        Thread.sleep(3000);
+        
+        // step 17
+        Assert.assertEquals(driver.findElement(By.cssSelector("input.orangehrm-firstname")).getAttribute("value"),firstName);
+        Assert.assertEquals(driver.findElement(By.cssSelector("input.orangehrm-lastname")).getAttribute("value"),lastName);
+        Assert.assertEquals(driver.findElement(By.xpath("//label[text()='Employee Id']/parent::div/following-sibling::div/input")).getAttribute("value"),passportNumber);
+
+        // step 18
+        driver.findElement(By.xpath("//a[text()='Immigration']")).click();
+        driver.findElement(By.cssSelector("i[class='oxd-icon bi-pencil-fill']")).click();
+
+        // step 19
+        Assert.assertEquals(driver.findElement(By.xpath("//label[text()='Number']/parent::div/following-sibling::div/input")).getAttribute("value"),passportNumber);
+        Assert.assertEquals(driver.findElement(By.cssSelector("textarea[class='oxd-textarea oxd-textarea--active oxd-textarea--resize-vertical']")).getAttribute("value"),passportComment);
 
     }
 
