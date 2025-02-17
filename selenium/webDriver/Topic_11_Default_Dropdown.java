@@ -70,9 +70,19 @@ public class Topic_11_Default_Dropdown {
         Thread.sleep(3000);
 
         driver.findElement(By.cssSelector("input#map_search_query")).sendKeys("Ho Chi Minh");
-        driver.findElement(By.cssSelector("button[class='btn btn-default']")).click();
+        // do teen class hoiw chung chung neen laays theo text
+//        driver.findElement(By.cssSelector("button[class='btn btn-default']")).click();
+        driver.findElement(By.xpath("//button[text()='Search']")).click();
+        Thread.sleep(3000);
 
 
+        List<WebElement> dealers = driver.findElements(By.cssSelector("div.dealer_branch h4"));
+        Assert.assertEquals(dealers.size(),16);
+
+        // ham for-each trong java
+        for (WebElement dealerName : dealers) {
+            System.out.println(dealerName.getText());
+        }
 
 
     }
