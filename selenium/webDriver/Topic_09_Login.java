@@ -62,7 +62,12 @@ public class Topic_09_Login {
         driver.findElement(By.cssSelector("input#email")).sendKeys("automation@gmail.com");
         driver.findElement(By.cssSelector("input#pass")).sendKeys("123123123");
         driver.findElement(By.cssSelector("button#send2")).click();
-        Assert.assertEquals(driver.findElement(By.cssSelector("div#advice-validate-password-pass")).getText(),"Please enter 6 or more characters without leading or trailing spaces.");
+        driver.findElement(By.cssSelector("#proceed-button")).click();
+
+        driver.findElement(By.xpath("//span[text()='Invalid login or password.']"));
+        System.out.println("done");
+
+//        Assert.assertEquals(driver.findElement(By.xpath("//span[text()='Invalid login or password.']")),"Invalid login or password.");
 
 
 

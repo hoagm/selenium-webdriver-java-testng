@@ -74,17 +74,20 @@ public class Topic_10_TextBox_Textarea {
 
         // step3
         driver.findElement(By.xpath("//span[text()='PIM']/parent::a")).click();
+        Thread.sleep(4000);
 
         // step 4
         driver.findElement(By.xpath("//a[text()='Add Employee']")).click();
+        Thread.sleep(4000);
 
         //step 5
         driver.findElement(By.cssSelector("input.orangehrm-firstname")).sendKeys(firstName);
         driver.findElement(By.cssSelector("input.orangehrm-lastname")).sendKeys(lastName);
+        Thread.sleep(4000);
 
         String empID = driver.findElement(By.xpath("//label[text()='Employee Id']/parent::div/following-sibling::div/input")).getAttribute("value");
 
-        driver.findElement(By.cssSelector("span.oxd-switch-input']")).click();
+        driver.findElement(By.cssSelector("span.oxd-switch-input")).click();
         Thread.sleep(3000);
         driver.findElement(By.xpath("//label[text()='Username']/parent::div/following-sibling::div/input")).sendKeys(userName);
         driver.findElement(By.xpath("//label[text()='Password']/parent::div/following-sibling::div/input")).sendKeys(password);
@@ -109,7 +112,7 @@ public class Topic_10_TextBox_Textarea {
         // step 10
         driver.findElement(By.xpath("//label[text()='Number']/parent::div/following-sibling::div/input")).sendKeys(passportNumber);
         driver.findElement(By.cssSelector("textarea[class='oxd-textarea oxd-textarea--active oxd-textarea--resize-vertical']")).sendKeys(passportComment);
-        driver.findElement(By.xpath("button[class='oxd-button oxd-button--medium oxd-button--secondary orangehrm-left-space']")).click();
+        driver.findElement(By.cssSelector("button[class='oxd-button oxd-button--medium oxd-button--secondary orangehrm-left-space']")).click();
         Thread.sleep(3000);
 
         // step 11
@@ -121,15 +124,19 @@ public class Topic_10_TextBox_Textarea {
         Assert.assertEquals(driver.findElement(By.cssSelector("textarea[class='oxd-textarea oxd-textarea--active oxd-textarea--resize-vertical']")).getAttribute("value"),passportComment);
 
         // step 14
-        driver.findElement(By.id(".oxd-userdropdown")).click();
+        driver.findElement(By.cssSelector(".oxd-userdropdown")).click();
         Thread.sleep(2000);
         driver.findElement(By.xpath("//a[text()='Logout']")).click();
         Thread.sleep(2000);
 
 
         // step 15
-        driver.findElement(By.cssSelector("input.orangehrm-firstname")).sendKeys(userName);
-        driver.findElement(By.cssSelector("input.orangehrm-lastname")).sendKeys(password);
+        driver.findElement(By.cssSelector("input[name='username']")).sendKeys(userName);
+        driver.findElement(By.cssSelector("input[name='password']")).sendKeys(password);
+        System.out.println(userName);
+        System.out.println(password);
+        driver.findElement(By.cssSelector("button.orangehrm-login-button")).click();
+
 
         // step 16
         driver.findElement(By.xpath("//span[text()='My Info']/parent::a/parent::li")).click();
@@ -138,7 +145,10 @@ public class Topic_10_TextBox_Textarea {
         // step 17
         Assert.assertEquals(driver.findElement(By.cssSelector("input.orangehrm-firstname")).getAttribute("value"),firstName);
         Assert.assertEquals(driver.findElement(By.cssSelector("input.orangehrm-lastname")).getAttribute("value"),lastName);
+        System.out.println("firstName" + firstName);
+        System.out.println("lastName" + lastName);
         Assert.assertEquals(driver.findElement(By.xpath("//label[text()='Employee Id']/parent::div/following-sibling::div/input")).getAttribute("value"),passportNumber);
+        Thread.sleep(3000);
 
         // step 18
         driver.findElement(By.xpath("//a[text()='Immigration']")).click();

@@ -3,6 +3,7 @@ package webDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -21,7 +22,8 @@ public class Topic_12_Custom_Dropdown {
     WebDriver driver;
     @BeforeClass
     public void initialBrowser() {
-        driver = new FirefoxDriver();
+        driver = new ChromeDriver();
+
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
         driver.manage().window().maximize();
 
@@ -76,23 +78,23 @@ public class Topic_12_Custom_Dropdown {
         selectItemInDropdown("span#salutation-button", "ul#salutation-menu div", "Dr.");
         selectItemInDropdown("span#salutation-button", "ul#salutation-menu div", "Mr.");
         selectItemInDropdown("span#salutation-button", "ul#salutation-menu div", "Prof.");
-        Assert.assertEquals(driver.findElement(By.cssSelector("span#salutation-button span.ui-selectmenu-text")), "Prof.");
+        Assert.assertEquals(driver.findElement(By.cssSelector("span#salutation-button>span.ui-selectmenu-text")).getText(), "Prof.");
 
         // chọn speed
         selectItemInDropdown("span#speed-button", "ul#speed-menu div", "Slow");
-        Assert.assertEquals(driver.findElement(By.cssSelector("span#speed-button span.ui-selectmenu-text")), "Slow");
+        Assert.assertEquals(driver.findElement(By.cssSelector("span#speed-button span.ui-selectmenu-text")).getText(), "Slow");
     }
     @Test
     public void TC_02_React_Semantic() throws InterruptedException {
         driver.get("https://react.semantic-ui.com/maximize/dropdown-example-search-selection/");
         selectItemInDropdown("div.dropdown", "div[class='visible menu transition']", "Angola");
-        Assert.assertEquals(driver.findElement(By.cssSelector("div.divider")), "Angola.");
+        Assert.assertEquals(driver.findElement(By.cssSelector("div.divider")).getText(), "Angola.");
 
 
 
         driver.get("https://react.semantic-ui.com/maximize/dropdown-example-selection/");
         selectItemInDropdown("div.dropdown", "div.item>span.text", "Matt");
-        Assert.assertEquals(driver.findElement(By.cssSelector("div.divider")), "Matt.");
+        Assert.assertEquals(driver.findElement(By.cssSelector("div.divider")).getText(), "Matt.");
 
 
 
@@ -122,6 +124,7 @@ public class Topic_12_Custom_Dropdown {
     // 3- Clean
     @AfterClass
     public void cleanBrowser() {
+
         driver.quit();
     }
 
