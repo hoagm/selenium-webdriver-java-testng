@@ -4,8 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -75,33 +73,68 @@ public class Topic_12_Custom_Dropdown {
         // gọi hàm
 
         // chọn title
-        selectItemInDropdown("span#salutation-button", "ul#salutation-menu div", "Dr.");
-        selectItemInDropdown("span#salutation-button", "ul#salutation-menu div", "Mr.");
-        selectItemInDropdown("span#salutation-button", "ul#salutation-menu div", "Prof.");
+        selectItemInSelectableDropdown("span#salutation-button", "ul#salutation-menu div", "Dr.");
+        selectItemInSelectableDropdown("span#salutation-button", "ul#salutation-menu div", "Mr.");
+        selectItemInSelectableDropdown("span#salutation-button", "ul#salutation-menu div", "Prof.");
         Assert.assertEquals(driver.findElement(By.cssSelector("span#salutation-button>span.ui-selectmenu-text")).getText(), "Prof.");
 
         // chọn speed
-        selectItemInDropdown("span#speed-button", "ul#speed-menu div", "Slow");
+        selectItemInSelectableDropdown("span#speed-button", "ul#speed-menu div", "Slow");
         Assert.assertEquals(driver.findElement(By.cssSelector("span#speed-button span.ui-selectmenu-text")).getText(), "Slow");
     }
+
     @Test
     public void TC_02_React_Semantic() throws InterruptedException {
         driver.get("https://react.semantic-ui.com/maximize/dropdown-example-search-selection/");
-        selectItemInDropdown("div.dropdown", "div[class='visible menu transition']", "Angola");
+        selectItemInSelectableDropdown("div.dropdown", "div[class='visible menu transition']", "Angola");
         Assert.assertEquals(driver.findElement(By.cssSelector("div.divider")).getText(), "Angola.");
 
 
 
         driver.get("https://react.semantic-ui.com/maximize/dropdown-example-selection/");
-        selectItemInDropdown("div.dropdown", "div.item>span.text", "Matt");
+        selectItemInSelectableDropdown("div.dropdown", "div.item>span.text", "Matt");
         Assert.assertEquals(driver.findElement(By.cssSelector("div.divider")).getText(), "Matt.");
+    }
 
+    @Test
+    public void TC_03_VueJs() throws InterruptedException {
+        driver.get("https://mikerodham.github.io/vue-dropdowns/");
 
-
-
+        selectItemInSelectableDropdown("li.dropdown-toggle",  "ul.dropdown-menu a", "First Option");
+        Assert.assertEquals(driver.findElement(By.cssSelector("li.dropdown-toggle")).getText(),  "First Option");
 
     }
-    private void selectItemInDropdown(String parentLocator, String childLocator, String textItem) throws InterruptedException {
+
+    @Test
+    public void TC_04_Editable() throws InterruptedException {
+        driver.get("https://react.semantic-ui.com/maximize/dropdown-example-search-selection/");
+
+        selectItemInEditableDropdown("input.search",  "div.item span.text", "Belize");
+        Assert.assertEquals(driver.findElement(By.cssSelector("div.divider")).getText(),  "Belize");
+
+
+        selectItemInEditableDropdown("input.search",  "div.item span.text", "Afghanistan");
+        Assert.assertEquals(driver.findElement(By.cssSelector("div.divider")).getText(),  "Afghanistan");
+
+    }
+
+    @Test
+    public void TC_05_Huawei() throws InterruptedException {
+        // nếu muốn dùng hàm để tái sử dụng nhiều lần trong trg hợp huawei
+        // thì vieets lại hàm và thêm click vào hàm đó
+        driver.get("https://id5.cloud.huawei.com/CAS/portal/userRegister/regbyemail.html");
+        new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.elementToBeClickable(By.cssSelector("div.hwid-dropInpunt")));
+
+        driver.findElement(By.cssSelector("div.hwid-dropInpunt")).click();
+        Thread.sleep(1000);
+
+        selectItemInEditableDropdown("div.hwid-dropInpunt input.hwid-search-text",  "ul.hwid-list-module span.list-item-text", "Singapore");
+        Assert.assertEquals(driver.findElement(By.cssSelector("div.hwid-countryDropDown-area span.hwid-select-text")).getText(),  "Singapore");
+
+    }
+
+
+    private void selectItemInSelectableDropdown(String parentLocator, String childLocator, String textItem) throws InterruptedException {
         driver.findElement(By.cssSelector(parentLocator)).click();
         Thread.sleep(2000);
 
@@ -114,7 +147,28 @@ public class Topic_12_Custom_Dropdown {
 
         // Duyệt qua từng element để ktra vs điều kiện nếu text của item = cái mình mong thì click vào chính thằng đó
         for (WebElement item : allItems) {
-            if (item.getText().equals(textItem)) {
+            if (item.getText().trim().equals(textItem)) {
+                item.click();
+                break;
+            }
+        }
+    }
+
+    private void selectItemInEditableDropdown(String parentLocator, String childLocator, String textItem) throws InterruptedException {
+        driver.findElement(By.cssSelector(parentLocator)).clear();
+        driver.findElement(By.cssSelector(parentLocator)).sendKeys(textItem);
+        Thread.sleep(2000);
+
+        // chờ cho tất cả các item load/ xổ hết ra?
+        // Cách chờ linh động, ko chờ cứng bằng thread.sleep
+        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector(childLocator)));
+
+        // tìm và lấy ra các item bên trong và lưu vào 1 biến( kiểu data là list)
+        List<WebElement> allItems = driver.findElements(By.cssSelector(childLocator));
+
+        // Duyệt qua từng element để ktra vs điều kiện nếu text của item = cái mình mong thì click vào chính thằng đó
+        for (WebElement item : allItems) {
+            if (item.getText().trim().equals(textItem)) {
                 item.click();
                 break;
             }
