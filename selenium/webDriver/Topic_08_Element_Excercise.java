@@ -182,11 +182,14 @@ public class Topic_08_Element_Excercise {
     @Test
     public void TC_04_MailChimp_validate () throws InterruptedException {
         driver.get("https://login.mailchimp.com/signup/");
-//        Thread.sleep(3000);
+        // close cookie banner hoặc có thể dùng cách scroll xuống cuối trang rooif mới click signup
+//        driver.findElement(By.cssSelector("div#onetrust-close-btn-container")).click();
 
-//        driver.findElement(By.cssSelector("#onetrust-close-btn-container")).click();
 
         driver.findElement(By.cssSelector("input#email")).sendKeys("autotest@gmail.net");
+        //scroll xuoongs button
+        ((JavascriptExecasutor) driver).executeScript("arguments[0].scrollIntoView(true);", driver.findElement(By.cssSelector("button#create-account-enabled")));
+        Thread.sleep(2000);
         driver.findElement(By.cssSelector("button#create-account-enabled")).click();
         Thread.sleep(3000);
 
