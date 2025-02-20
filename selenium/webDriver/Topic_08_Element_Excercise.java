@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -188,7 +189,7 @@ public class Topic_08_Element_Excercise {
 
         driver.findElement(By.cssSelector("input#email")).sendKeys("autotest@gmail.net");
         //scroll xuoongs button
-        ((JavascriptExecasutor) driver).executeScript("arguments[0].scrollIntoView(true);", driver.findElement(By.cssSelector("button#create-account-enabled")));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", driver.findElement(By.cssSelector("button#create-account-enabled")));
         Thread.sleep(2000);
         driver.findElement(By.cssSelector("button#create-account-enabled")).click();
         Thread.sleep(3000);

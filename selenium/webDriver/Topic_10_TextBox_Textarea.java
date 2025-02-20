@@ -85,7 +85,7 @@ public class Topic_10_TextBox_Textarea {
         driver.findElement(By.cssSelector("input.orangehrm-lastname")).sendKeys(lastName);
         Thread.sleep(4000);
 
-        String empID = driver.findElement(By.xpath("//label[text()='Employee Id']/parent::div/following-sibling::div/input")).getAttribute("value");
+        String empID = driver.findElement(By.xpath("//label[text()='Employee Id']/parent::div/following-sibling::div/input")).getDomProperty("value");
 
         driver.findElement(By.cssSelector("span.oxd-switch-input")).click();
         Thread.sleep(3000);
@@ -98,9 +98,9 @@ public class Topic_10_TextBox_Textarea {
         Thread.sleep(4000);
 
         // step 7
-        Assert.assertEquals(driver.findElement(By.cssSelector("input[class='oxd-input oxd-input--active orangehrm-firstname']")).getAttribute("value"),firstName);
-        Assert.assertEquals(driver.findElement(By.cssSelector("input[class='oxd-input oxd-input--active orangehrm-lastname']")).getAttribute("value"),lastName);
-        Assert.assertEquals(driver.findElement(By.xpath("//label[text()='Employee Id']/parent::div/following-sibling::div/input")).getAttribute("value"),empID);
+        Assert.assertEquals(driver.findElement(By.cssSelector("input[class='oxd-input oxd-input--active orangehrm-firstname']")).getDomProperty("value"),firstName);
+        Assert.assertEquals(driver.findElement(By.cssSelector("input[class='oxd-input oxd-input--active orangehrm-lastname']")).getDomProperty("value"),lastName);
+        Assert.assertEquals(driver.findElement(By.xpath("//label[text()='Employee Id']/parent::div/following-sibling::div/input")).getDomProperty("value"),empID);
 
         // step 8
         driver.findElement(By.xpath("//a[text()='Immigration']")).click();
@@ -120,8 +120,8 @@ public class Topic_10_TextBox_Textarea {
         Thread.sleep(2000);
 
         // step 12
-        Assert.assertEquals(driver.findElement(By.xpath("//label[text()='Number']/parent::div/following-sibling::div/input")).getAttribute("value"),passportNumber);
-        Assert.assertEquals(driver.findElement(By.cssSelector("textarea[class='oxd-textarea oxd-textarea--active oxd-textarea--resize-vertical']")).getAttribute("value"),passportComment);
+        Assert.assertEquals(driver.findElement(By.xpath("//label[text()='Number']/parent::div/following-sibling::div/input")).getDomProperty("value"),passportNumber);
+        Assert.assertEquals(driver.findElement(By.cssSelector("textarea[class='oxd-textarea oxd-textarea--active oxd-textarea--resize-vertical']")).getDomProperty("value"),passportComment);
 
         // step 14
         driver.findElement(By.cssSelector(".oxd-userdropdown")).click();
@@ -143,11 +143,11 @@ public class Topic_10_TextBox_Textarea {
         Thread.sleep(3000);
         
         // step 17
-        Assert.assertEquals(driver.findElement(By.cssSelector("input.orangehrm-firstname")).getAttribute("value"),firstName);
-        Assert.assertEquals(driver.findElement(By.cssSelector("input.orangehrm-lastname")).getAttribute("value"),lastName);
+        Assert.assertEquals(driver.findElement(By.cssSelector("input.orangehrm-firstname")).getDomProperty("value"),firstName);
+        Assert.assertEquals(driver.findElement(By.cssSelector("input.orangehrm-lastname")).getDomProperty("value"),lastName);
         System.out.println("firstName" + firstName);
         System.out.println("lastName" + lastName);
-        Assert.assertEquals(driver.findElement(By.xpath("//label[text()='Employee Id']/parent::div/following-sibling::div/input")).getAttribute("value"),passportNumber);
+        Assert.assertEquals(driver.findElement(By.xpath("//label[text()='Employee Id']/parent::div/following-sibling::div/input")).getDomProperty("value"),empID);
         Thread.sleep(3000);
 
         // step 18
@@ -155,8 +155,8 @@ public class Topic_10_TextBox_Textarea {
         driver.findElement(By.cssSelector("i[class='oxd-icon bi-pencil-fill']")).click();
 
         // step 19
-        Assert.assertEquals(driver.findElement(By.xpath("//label[text()='Number']/parent::div/following-sibling::div/input")).getAttribute("value"),passportNumber);
-        Assert.assertEquals(driver.findElement(By.cssSelector("textarea[class='oxd-textarea oxd-textarea--active oxd-textarea--resize-vertical']")).getAttribute("value"),passportComment);
+        Assert.assertEquals(driver.findElement(By.xpath("//label[text()='Number']/parent::div/following-sibling::div/input")).getDomProperty("value"),passportNumber);
+        Assert.assertEquals(driver.findElement(By.cssSelector("textarea[class='oxd-textarea oxd-textarea--active oxd-textarea--resize-vertical']")).getDomProperty("value"),passportComment);
 
     }
 
