@@ -5,14 +5,11 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import javax.lang.model.element.Element;
-import java.time.Duration;
 import java.util.List;
 
 public class Topic_14_CheckBox_Radio {
@@ -22,8 +19,8 @@ public class Topic_14_CheckBox_Radio {
     @BeforeClass
     public void initialBrowser() {
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
-        driver.manage().window().maximize();
+//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+//        driver.manage().window().maximize();
 
         // 1- Browser mowr ra n ko maximize
         // 2- Loading icon chưa biến mất
@@ -55,7 +52,7 @@ public class Topic_14_CheckBox_Radio {
 
         // step 5
         driver.get("https://demos.telerik.com/kendo-ui/radiobutton/index");
-        By petrol2 = By.xpath("//label[text()='2.0 Petrol, 147kW']/preceding-sibling::span");
+        By petrol2 = By.xpath("//label[text()='2.0 Petrol, 147kW']/preceding-sibling::span/input");
 
         // step 6
         driver.findElement(petrol2).click();
@@ -71,8 +68,8 @@ public class Topic_14_CheckBox_Radio {
     @Test
     public void TC_02_Radio () throws InterruptedException {
         driver.get("https://material.angular.io/components/radio/examples");
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", driver.findElement(By.xpath("//div[@id='demo-runner']")));
-        Thread.sleep(3000);
+//        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", driver.findElement(By.xpath("//div[@id='demo-runner']")));
+//        Thread.sleep(3000);
         By summerRadioButton = By.xpath("//label[text()='Summer']/preceding-sibling::div/input");
 
         // step 2

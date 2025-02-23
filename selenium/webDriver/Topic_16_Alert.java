@@ -3,7 +3,7 @@ package webDriver;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -19,9 +19,9 @@ public class Topic_16_Alert {
     WebDriver driver;
     @BeforeClass
     public void initialBrowser() {
-        driver = new FirefoxDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
-        driver.manage().window().maximize();
+        driver = new ChromeDriver();
+//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+//        driver.manage().window().maximize();
 
     }
 
@@ -83,19 +83,21 @@ public class Topic_16_Alert {
     }
 
     @Test
-    public void TC_04_Authentication_Alert () {
+    public void TC_04_Authentication_Alert () throws InterruptedException {
         String username = "admin";
         String password = "admin";
 
         // cách 1: truyền thẳng vào URL
 //        driver.get("http://admin:admin@the-internet.herokuapp.com/basic_auth");
-        driver.get("http://"+ username + ":" + password + "@" + "the-internet.herokuapp.com/basic_auth");
+//        driver.get("http://"+ username + ":" + password + "@" + "the-internet.herokuapp.com/basic_auth");
 
         // cách 2: ko  thể trực tiếp gán user và pas vào
 
-        driver.get("http://the-internet.herokuapp.com/basic_auth");
+        driver.get("http://the-internet.herokuapp.com");
+        Thread.sleep(3000);
 
         String authenLink = driver.findElement(By.xpath("//a[text()='Basic Auth']")).getDomProperty("href");
+
         driver.get(passUserAuthenLink(authenLink, username, password));
         Assert.assertEquals(driver.findElement(By.cssSelector("div.example>p")).getText(), "Congratulations! You must have the proper credentials.");
 

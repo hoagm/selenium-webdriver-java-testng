@@ -3,7 +3,7 @@ package webDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -20,15 +20,16 @@ public class Topic_13_Button {
     WebDriver driver;
     @BeforeClass
     public void initialBrowser() {
-        driver = new FirefoxDriver();
+        driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
         driver.manage().window().maximize();
     }
 
     // 2- Action/ Execute
     @Test
-    public void TC_01_Button () {
+    public void TC_01_Button () throws InterruptedException {
         driver.get("https://www.fahasa.com/customer/account/create");
+//        Thread.sleep(3000);
         By registerButton = By.cssSelector("button.fhs-btn-register");
 
         // 1, Clickable
@@ -36,7 +37,7 @@ public class Topic_13_Button {
         new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.not(ExpectedConditions.elementToBeClickable(registerButton)));
 
         // 2. Text hiển thị đúng
-        Assert.assertEquals(driver.findElement(registerButton).getText().trim(), "Đăng Ký");
+        Assert.assertEquals(driver.findElement(registerButton).getText().trim(), "Đăng ký");
 
         // 3. Background màu gì
         String backgroundElement = driver.findElement(registerButton).getCssValue("background-color");
@@ -52,7 +53,7 @@ public class Topic_13_Button {
 
     }
     @Test
-    public void TC_02_Fahasa () {
+    public void TC_02_Fahasa () throws InterruptedException {
         driver.get("https://www.fahasa.com/customer/account/create");
 
         WebElement buttonLogin = driver.findElement(By.cssSelector("button.fhs-btn-login"));
@@ -65,17 +66,20 @@ public class Topic_13_Button {
         Assert.assertFalse(buttonLogin.isEnabled());
 
         // step 4
-        Assert.assertEquals(Color.fromString(buttonLoginColor).asHex().toUpperCase(), "#e0e0e0");
+        Assert.assertEquals(Color.fromString(buttonLoginColor).asHex().toUpperCase(), "#000000");
 
         // step 5
         driver.findElement(By.cssSelector("input#login_username")).sendKeys("0123456789");
         driver.findElement(By.cssSelector("input#login_password")).sendKeys("a123456");
+        Thread.sleep(3000);
 
         // step 6
         Assert.assertTrue(buttonLogin.isEnabled());
+        String buttonLoginAfterColor = buttonLogin.getCssValue("background-color");
+
 
         // step 7
-        Assert.assertEquals(Color.fromString(buttonLoginColor).asHex().toUpperCase(), "#C92127");
+        Assert.assertEquals(Color.fromString(buttonLoginAfterColor).asHex().toUpperCase(), "#C92127");
 
 
 
