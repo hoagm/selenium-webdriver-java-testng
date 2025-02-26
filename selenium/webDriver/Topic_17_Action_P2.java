@@ -21,9 +21,10 @@ public class Topic_17_Action_P2 {
     @BeforeClass
     public void initialBrowser() {
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
-        driver.manage().window().maximize();
+//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+//        driver.manage().window().maximize();
 
+        action = new Actions(driver);
     }
 
     // 2- Action/ Execute
@@ -35,7 +36,6 @@ public class Topic_17_Action_P2 {
         // kéo giữ chuột
         // nhả chuột
         List<WebElement> numbers = driver.findElements(By.cssSelector("ol#selectable li"));
-
         action.clickAndHold(numbers.get(4)) // click và giữ tại element 5
                 .pause(Duration.ofSeconds(2))
                 .moveToElement(numbers.get(11)) // di chuột đến element 12
@@ -49,7 +49,7 @@ public class Topic_17_Action_P2 {
     }
 
     @Test
-    public void TC_02_ClickAndHol_Random () {
+    public void TC_02_ClickAndHol_Random () throws InterruptedException {
         driver.get("https://automationfc.github.io/jquery-selectable/");
 
         // click chọn 1 số đầu tiên cần tìm n chưa nhả chuột
@@ -67,46 +67,44 @@ public class Topic_17_Action_P2 {
             keys = Keys.COMMAND;
         }
 
-        // Actual Number
-        List<String> actualNumber = new ArrayList<String>();
-        actualNumber.add("1");
-        actualNumber.add("4");
-        actualNumber.add("9");
-        actualNumber.add("5");
-        actualNumber.add("13");
-        actualNumber.add("18");
+        List<String> actualNumbers = new ArrayList<String>();
+        actualNumbers.add("2");
+        actualNumbers.add("5");
+        actualNumbers.add("6");
+        actualNumbers.add("9");
+        actualNumbers.add("14");
+        actualNumbers.add("19");
 
         // ấn phím ctrl/cmd trên bàn phím
         action.keyDown(keys).perform();
 
         // cách 1: click từng thằng
-        action.click(numbers.get(2)) // truyền index
-                .click(numbers.get(5))
-                .click(numbers.get(9))
-                .click(numbers.get(6))
-                .click(numbers.get(14))
-                .click(numbers.get(19))
-                .perform();
+//        action.click(numbers.get(2)) // truyền index
+//                .click(numbers.get(5))
+//                .click(numbers.get(10))
+//                .click(numbers.get(6))
+//                .click(numbers.get(14))
+//                .click(numbers.get(19))
+//                .perform();
 
         // cách 2 chuyển từ String ở actual Number về integer rồi truyền vào để click
-        for (String number : actualNumber) {
+        for (String number : actualNumbers) {
             action.click(numbers.get(Integer.parseInt(number) - 1 ));
         }
 
-
         action.keyUp(keys).perform();
 
-        List<WebElement> numberSelected = driver.findElements(By.cssSelector("ol#selectable li.ui-selected"));
+        List<WebElement> numberSelected = driver.findElements(By.cssSelector("ol#selectable>li.ui-selected"));
+        Thread.sleep(3000);
         Assert.assertEquals(numberSelected.size(),6);
 
         // Expected Number
-        List<String> expectedNumber = new ArrayList<String>();
+        List<String> expectedNumbers = new ArrayList<String>();
 
         for (WebElement number : numberSelected) {
-            expectedNumber.add(number.getText());
+            expectedNumbers.add(number.getText());
         }
-
-        Assert.assertEquals(actualNumber,expectedNumber);
+        Assert.assertEquals(actualNumbers,expectedNumbers);
 
 
     }

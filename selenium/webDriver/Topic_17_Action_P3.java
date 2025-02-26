@@ -24,6 +24,8 @@ public class Topic_17_Action_P3 {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
         driver.manage().window().maximize();
+        action = new Actions(driver);
+
 
     }
 
@@ -44,7 +46,7 @@ public class Topic_17_Action_P3 {
 
         // Sau khi drag and drop
         Assert.assertEquals(targetCircle.getText(), "You did great!");
-        Assert.assertEquals(Color.fromString(targetCircle.getCssValue("background-color")).asHex().toUpperCase(), "#03a9f4");
+        Assert.assertEquals(Color.fromString(targetCircle.getCssValue("background-color")).asHex(), "#03a9f4");
 
     }
     @Test

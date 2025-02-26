@@ -22,11 +22,12 @@ public class Topic_18_Fixed_popup {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
         driver.manage().window().maximize();
 
+
     }
 
     // 2- Action/ Execute
     @Test
-    public void TC_01_Fixed_Not_Found_in_DOM () {
+    public void TC_01_Fixed_Not_Found_in_DOM () throws InterruptedException {
         driver.get("https://ngoaingu24h.vn/");
 
         By popupDialog = By.cssSelector("div#custom-dialog div[role='dialog']");
@@ -38,11 +39,13 @@ public class Topic_18_Fixed_popup {
         // điền thông tin
         driver.findElement(By.cssSelector("input[placeholder='Tài khoản đăng nhập']")).sendKeys("automation");
         driver.findElement(By.cssSelector("input[placeholder='Mật khẩu']")).sendKeys("1233456");
-        driver.findElement(By.cssSelector("//div[@id='custom-dialog'] //button[text()='Đăng nhập']")).click();
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//div[@id='custom-dialog'] //button[text()='Đăng nhập']")).click();
 
         Assert.assertEquals(driver.findElement(By.cssSelector("div#notistack-snackbar")).getText(), "Bạn đã nhập sai tài khoản hoặc mật khẩu!");
 
         driver.findElement(By.xpath("//h2[text()='Đăng nhập']//button")).click();
+        Thread.sleep(2000);
 
         // do popup đã ko cồn hiển thị trong HTML nên ko thể dùng hàm display để verify
         // findElement chỉ trẩ về 1 element, khi ko tìm thấy thì nó fail
@@ -61,7 +64,7 @@ public class Topic_18_Fixed_popup {
 
         Assert.assertTrue(driver.findElement(By.cssSelector("div#Login")).isDisplayed());
         driver.findElement(By.cssSelector("div#Login button.close")).click();
-
+        Thread.sleep(3000);
         Assert.assertFalse(driver.findElement(By.cssSelector("div#Login")).isDisplayed());
     }
 
@@ -114,7 +117,7 @@ public class Topic_18_Fixed_popup {
     @AfterClass
     public void cleanBrowser() {
 
-        driver.quit();
+//        driver.quit();
     }
 
 }
