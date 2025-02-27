@@ -24,6 +24,8 @@ public class Topic_18_Random_Popup {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
         driver.manage().window().maximize();
+        action = new Actions(driver);
+
 
     }
 
@@ -63,7 +65,7 @@ public class Topic_18_Random_Popup {
         }
 
         action.moveToElement(driver.findElement(By.cssSelector("li[class='pc pc64x']"))).perform();
-        driver.findElement(By.xpath("//li[@class='pc']/a[text()='KMPlayer']']")).click();
+        driver.findElement(By.xpath("//li[@class='pc']/a[text()='KMPlayer']")).click();
         Thread.sleep(3000);
 
         Assert.assertEquals(driver.findElement(By.cssSelector("div.sub h1")).getText(),"KMPlayer - Video Player for PC");
@@ -106,7 +108,7 @@ public class Topic_18_Random_Popup {
     @AfterClass
     public void cleanBrowser() {
 
-//        driver.quit();
+        driver.quit();
     }
 
 }

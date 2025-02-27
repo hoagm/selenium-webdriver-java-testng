@@ -98,7 +98,7 @@ public class Topic_18_Fixed_popup {
 
         Assert.assertTrue(driver.findElement(By.cssSelector("div.ReactModal__Content")).isDisplayed());
 
-        driver.findElement(By.cssSelector("login-with-email")).click();
+        driver.findElement(By.cssSelector("p.login-with-email")).click();
         Thread.sleep(2000);
 
         driver.findElement(By.xpath("//button[text()='Đăng nhập']")).click();

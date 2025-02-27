@@ -52,7 +52,7 @@ public class Topic_19_Shadow_DOM {
         SearchContext secondShadowRoot = secondShadowHostElement.getShadowRoot();
 
         // lấy text ra
-        System.out.println(secondShadowRoot.findElement(By.cssSelector("div#nested_shadow_host>div")).getText());
+//        System.out.println(secondShadowRoot.findElement(By.cssSelector("div#nested_shadow_host>div")).getText());
 
     }
     @Test
@@ -69,7 +69,10 @@ public class Topic_19_Shadow_DOM {
         firstShadowRoot.findElement(By.cssSelector("input#input")).sendKeys("Hary porter");
         Thread.sleep(3000);
 
-        firstShadowRoot.findElement(By.cssSelector("div.icon")).click();
+        WebElement iconShadow = firstShadowRoot.findElement(By.cssSelector("book-input-decorator"));
+        SearchContext iconShadowRoot = iconShadow.getShadowRoot();
+
+        iconShadowRoot.findElement(By.cssSelector("div.icon")).click();
 
         // kết quả sau khi search
         WebElement thirdShadow = firstShadowRoot.findElement(By.cssSelector("book-explore[class='_page']"));
