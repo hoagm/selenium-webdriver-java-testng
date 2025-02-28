@@ -11,6 +11,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
+import java.util.List;
 
 public class Topic_19_Shadow_DOM {
 
@@ -52,7 +53,7 @@ public class Topic_19_Shadow_DOM {
         SearchContext secondShadowRoot = secondShadowHostElement.getShadowRoot();
 
         // lấy text ra
-//        System.out.println(secondShadowRoot.findElement(By.cssSelector("div#nested_shadow_host>div")).getText());
+        System.out.println(secondShadowRoot.findElement(By.cssSelector("div#nested_shadow_host>div")).getText());
 
     }
     @Test
@@ -63,50 +64,27 @@ public class Topic_19_Shadow_DOM {
         WebElement firstShadow = driver.findElement(By.cssSelector("book-app[apptitle='BOOKS']"));
         SearchContext firstShadowRoot = firstShadow.getShadowRoot();
 
-//        WebElement secondShadow = firstShadowRoot.findElement(By.cssSelector("book-input-decorator"));
-//        SearchContext secondShadowRoot = secondShadow.getShadowRoot();
-
         firstShadowRoot.findElement(By.cssSelector("input#input")).sendKeys("Hary porter");
         Thread.sleep(3000);
 
-        WebElement iconShadow = firstShadowRoot.findElement(By.cssSelector("book-input-decorator"));
-        SearchContext iconShadowRoot = iconShadow.getShadowRoot();
-
-        iconShadowRoot.findElement(By.cssSelector("div.icon")).click();
+        firstShadowRoot.findElement(By.cssSelector("div.icon")).click();
 
         // kết quả sau khi search
-        WebElement thirdShadow = firstShadowRoot.findElement(By.cssSelector("book-explore[class='_page']"));
+        WebElement secondShadow = firstShadowRoot.findElement(By.cssSelector("book-explore[class='_page']"));
+        SearchContext secondShadowRoot = secondShadow.getShadowRoot();
+
+        WebElement thirdShadow = secondShadowRoot.findElement(By.cssSelector("book-item"));
         SearchContext thirdShadowRoot = thirdShadow.getShadowRoot();
 
-        WebElement fourShadow = thirdShadowRoot.findElement(By.cssSelector("book-item"));
-        SearchContext fourShadowRoot = fourShadow.getShadowRoot();
+        thirdShadowRoot.findElement(By.cssSelector("div.title-container h2"));
 
-        fourShadowRoot.findElement(By.cssSelector("div.title-container h2"));
+        List<WebElement> fourShadows = thirdShadowRoot.findElements(By.cssSelector("ul.books>li>books-item"));
 
+        for (WebElement element : fourShadows) {
+            SearchContext fourShadowRoot = element.getShadowRoot();
+            System.out.println(fourShadowRoot.findElement(By.cssSelector("div.title-container h2")).getText());
 
-
-
-
-//        WebElement firstShadow = driver.findElement(By.cssSelector("book-app[apptitle='BOOKS']"));
-//        SearchContext firstShadowRoot = firstShadow.getShadowRoot();
-//
-//        WebElement secondShadow = firstShadow.findElement(By.cssSelector("app-header[effects='waterfall']"));
-//        SearchContext secondShadowRoot = secondShadow.getShadowRoot();
-//
-//        WebElement thirdShadow = secondShadowRoot.findElement(By.cssSelector("div.toolbar-bottom"));
-//        SearchContext thirdShadowRoot = thirdShadow.getShadowRoot();
-//
-//        WebElement fourShadow = thirdShadowRoot.findElement(By.cssSelector("book-input-decorator"));
-//        SearchContext fourShadowRoot = fourShadow.getShadowRoot();
-//
-//        fourShadowRoot.findElement(By.cssSelector("input")).sendKeys("Hary porter");
-
-
-
-
-
-
-
+        }
     }
 
     // 3- Clean
