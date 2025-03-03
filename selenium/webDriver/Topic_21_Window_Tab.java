@@ -44,7 +44,7 @@ public class Topic_21_Window_Tab {
         System.out.println(driver.getCurrentUrl());
         System.out.println(driver.getTitle());
 
-        driver.findElement(By.cssSelector("textarea[title='Search']")).sendKeys("selenium");
+        driver.findElement(By.cssSelector("textarea[title='Tìm kiếm']")).sendKeys("selenium");
 
         // quay lại trang github
         String googleID = driver.getWindowHandle();
@@ -92,7 +92,7 @@ public class Topic_21_Window_Tab {
     @AfterClass
     public void cleanBrowser() {
 
-        driver.quit();
+//        driver.quit();
     }
 
 }
