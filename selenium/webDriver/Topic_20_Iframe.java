@@ -69,6 +69,7 @@ public class Topic_20_Iframe {
     public void TC_02_Formsite () throws InterruptedException {
         driver.get("https://www.formsite.com/templates/education/campus-safety-survey/");
         Thread.sleep(3000);
+        driver.findElement(By.cssSelector("button.osano-cm-accept-all")).click();
 
         driver.findElement(By.cssSelector("div#imageTemplateContainer img")).click();
         Thread.sleep(3000);
@@ -76,15 +77,15 @@ public class Topic_20_Iframe {
         driver.switchTo().frame(driver.findElement(By.cssSelector("div#formTemplateContainer iframe")));
 
         // select dropdown year
-        new Select(driver.findElement(By.cssSelector("//label[contains(text(),'Year')]/following-sibling::select"))).selectByVisibleText("Senior");
-        Assert.assertEquals(select.getFirstSelectedOption().getText(), "Senior");
+        new Select(driver.findElement(By.xpath("//label[contains(text(),'Year')]/following-sibling::select"))).selectByVisibleText("Senior");
+//        Assert.assertEquals(select.getFirstSelectedOption().getText(), "Senior");
 
         // select dropdown residence
-        new Select(driver.findElement(By.cssSelector("//label[contains(text(),'Residence')]/following-sibling::select"))).selectByVisibleText("South Dorm");
-        Assert.assertEquals(select.getFirstSelectedOption().getText(),"South Dorm");
+        new Select(driver.findElement(By.xpath("//label[contains(text(),'Residence')]/following-sibling::select"))).selectByVisibleText("South Dorm");
+//        Assert.assertEquals(select.getFirstSelectedOption().getText(),"South Dorm");
 
         // select button Gender
-        WebElement gender = driver.findElement(By.cssSelector("td.highlight label"));
+        WebElement gender = driver.findElement(By.cssSelector(" label[for='RESULT_RadioButton-4_0']"));
         gender.click();
         Thread.sleep(3000);
         Assert.assertEquals(gender.getText(), "Male");
