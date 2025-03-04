@@ -181,16 +181,16 @@ public class Topic_21_Window_Tab {
         Thread.sleep(3000);
 
         // click tab mobile
-        driver.findElement(By.cssSelector("//a[text()='Mobile']")).click();
+        driver.findElement(By.xpath("//a[text()='Mobile']")).click();
         Thread.sleep(3000);
 
         String techPandaId = driver.getWindowHandle();
 
         // click add to compare
-        driver.findElement(By.cssSelector("//a[text()='Sony Xperia']/parent::h2/following-sibling::div[@class='actions']//a[text()='Add to Compare']")).click();
+        driver.findElement(By.xpath("//a[text()='Sony Xperia']/parent::h2/following-sibling::div[@class='actions']//a[text()='Add to Compare']")).click();
         Assert.assertEquals(driver.findElement(By.xpath("//li[@class='success-msg']//li")).getText(), "The product Sony Xperia has been added to comparison list.");
 
-        driver.findElement(By.cssSelector("//a[text()='IPhone']/parent::h2/following-sibling::div[@class='actions']//a[text()='Add to Compare']")).click();
+        driver.findElement(By.xpath("//a[text()='IPhone']/parent::h2/following-sibling::div[@class='actions']//a[text()='Add to Compare']")).click();
         Assert.assertEquals(driver.findElement(By.xpath("//li[@class='success-msg']//li")).getText(), "The product IPhone has been added to comparison list.");
 
         // click compare button
@@ -201,7 +201,7 @@ public class Topic_21_Window_Tab {
         Assert.assertEquals(driver.findElement(By.cssSelector("div.page-title h1")).getText(), "COMPARE PRODUCTS");
 
         // cách 1: close compare page - đã bao gồm switch về trang main
-        closeAllExceptMain(techPandaId);
+//        closeAllExceptMain(techPandaId);
 
         // cách 2: click cloose button và switch về
         driver.findElement(By.cssSelector("button[title='Close Window']")).click();
@@ -233,7 +233,7 @@ public class Topic_21_Window_Tab {
         switchToWindowByTitle("Login");
 
         // click login
-        driver.findElement(By.xpath("form#gigya-login-form input.gigya-input-submit")).click();
+        driver.findElement(By.cssSelector("form#gigya-login-form input.gigya-input-submit")).click();
         Thread.sleep(3000);
 
         // verify message
