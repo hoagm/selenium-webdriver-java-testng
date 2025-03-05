@@ -49,6 +49,8 @@ public class Topic_15_Custom_Checkbox_Radio {
         // Dùng ha click của JS vaerify bthg
 
         By registerRadio = By.cssSelector("input#id_new_user");
+        
+        // click vaaof 1 radio đang bị che bởi 1 element khác
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", driver.findElement(registerRadio));
         Thread.sleep(2000);
         Assert.assertTrue(driver.findElement(registerRadio).isSelected());
