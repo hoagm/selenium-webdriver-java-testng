@@ -11,12 +11,14 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
+import java.util.Random;
 
 public class Topic_22_JavaScriptExecutor {
 
     // 1- Setup: OS/ Web/ Browser/ Data/ Page...
     WebDriver driver;
     JavascriptExecutor jsExecutor;
+    String emailAddress;
 
 
     @BeforeClass
@@ -25,6 +27,8 @@ public class Topic_22_JavaScriptExecutor {
 
         // ép kiểu
         jsExecutor = (JavascriptExecutor) driver;
+
+        emailAddress = "donaltrump" + new Random().nextInt(9999) + "@gmail.net";
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
         driver.manage().window().maximize();
@@ -61,8 +65,52 @@ public class Topic_22_JavaScriptExecutor {
         System.out.println(techPandaURL);
         Assert.assertEquals(techPandaURL, "https://live.techpanda.org/");
 
-        // click mobile
+        // click mobile, dùng hàm highlight để nhìn rõ hơn
+        hightlightElement("//a[text()='Mobile']");
         clickToElementByJS("//a[text()='Mobile']");
+
+        // add to cart
+        hightlightElement("//a[text()='Samsung Galaxy']/parent::h2/following-sibling::div/button");
+        clickToElementByJS("//a[text()='Samsung Galaxy']/parent::h2/following-sibling::div/button");
+
+        // verify message
+        hightlightElement("//li[@class='success-msg'] //span");
+        Assert.assertEquals(getElementTextByJS("//li[@class='success-msg'] //span"), "Samsung Galaxy was added to your shopping cart.");
+
+        // open customer service page verify title
+        hightlightElement("//a[text()='Customer Service']");
+        clickToElementByJS("//a[text()='Customer Service']");
+
+        String customerServiceTitle = (String) executeForBrowser("return document.title");
+        System.out.println(techPandaDomain);
+        Assert.assertEquals(techPandaDomain, "Customer Service");
+
+        // scroll to element
+        scrollToElementOnTop("//input[@id='newsletter']");
+
+        // send key
+        hightlightElement("//input[@id='newsletter']");
+        sendkeyToElementByJS("//input[@id='newsletter']", emailAddress);
+
+        // click subscribe
+        hightlightElement("//span[text()='Subscribe']/ancestor::button");
+        clickToElementByJS("//span[text()='Subscribe']/ancestor::button");
+
+        // còn 1 bước verify, về làm bổ sung
+
+
+        // Get domain facebook
+        navigateToUrlByJS("https://www.facebook.com/");
+        String facebookDomain = (String) executeForBrowser("return document.domain");
+        System.out.println(techPandaDomain);
+        Assert.assertEquals(techPandaDomain, "www.facebook.com");
+
+    }
+
+    @Test
+    public void TC_03_HTML5 () {
+        // truy câp URl
+        navigateToUrlByJS("https://warranty.rode.com/register ");
 
     }
 
