@@ -112,6 +112,66 @@ public class Topic_22_JavaScriptExecutor {
         // truy câp URl
         navigateToUrlByJS("https://warranty.rode.com/register ");
 
+        driver.findElement(By.cssSelector("button[type='submit']")).click();
+//        driver.findElement(By.xpath("//button[contains(text(),'Register']")).click();
+
+        String validationMessage;
+
+        // cách 1 validate bằng js, thường sđụng trong selenium 3.x
+        validationMessage = getElementValidationMessage("//input[@id='name']");
+
+        // cách 2: selenium version 4. -> validate bằng dom properties
+        WebElement element = driver.findElement(By.xpath("//input[@id='name']"));
+        validationMessage = element.getDomProperty("validationMessage");
+
+        sleepInSecond(3);
+        Assert.assertEquals(validationMessage, "Please fill out this field.");
+
+        // send key name
+        driver.findElement(By.xpath("//input[@id='name']")).sendKeys("automation");
+        driver.findElement(By.cssSelector("button[type='submit']")).click();
+        sleepInSecond(2);
+        Assert.assertEquals(getElementValidationMessage("//input[@id='email']"), "Please fill out this field.");
+
+        // send email sai
+        driver.findElement(By.xpath("//input[@id='email']")).sendKeys("automation@gmai@hotmail.com");
+        driver.findElement(By.cssSelector("button[type='submit']")).click();
+        sleepInSecond(2);
+        Assert.assertEquals(getElementValidationMessage("//input[@id='email']"), "A part following '@' should not contain the symbol '@'.");
+
+    }
+
+    @Test
+    public void TC_04_TechPanda5 () {
+        Random rand = new Random();
+
+        navigateToUrlByJS("https://live.techpanda.org/");
+
+        // click vào my account
+        clickToElementByJS("//div[@id='header-account']//a[text()='My Account']");
+        sleepInSecond(2);
+
+        // click create acc
+        clickToElementByJS("//a[@title='Create an Account']");
+        sleepInSecond(2);
+
+        // nhập data
+        sendkeyToElementByJS("//input[@id='firstname']", "auto");
+        sendkeyToElementByJS("//input[@id='middlename']", "FC");
+        sendkeyToElementByJS("//input[@id='lastname']", "mation");
+
+        String email = "donaltrump" + rand.nextInt(999) + "@gmail.net";
+        sendkeyToElementByJS("//input[@id='email_address']", email);
+
+        sendkeyToElementByJS("//input[@id='password']", "a@123456");
+        sendkeyToElementByJS("//input[@id='confirmation']", "a@123456");
+
+        // submit
+        clickToElementByJS("//button[@title='Register']");
+
+        // verify message
+        
+
     }
 
     // 3- Clean
@@ -162,7 +222,7 @@ public class Topic_22_JavaScriptExecutor {
     public void clickToElementByJS(String locator) {
         jsExecutor.executeScript("arguments[0].click();", getElement(locator));
         // tương đương với
-        jsExecutor.executeScript("arguments[0].click();", driver.findElement(By.xpath(locator)));
+//        jsExecutor.executeScript("arguments[0].click();", driver.findElement(By.xpath(locator)));
         sleepInSecond(3);
     }
 
