@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class Topic_24_Wait_PI_Element_Status {
+public class Topic_24_Wait_I_Element_Status {
 
     // 1- Setup: OS/ Web/ Browser/ Data/ Page...
     WebDriver driver;
