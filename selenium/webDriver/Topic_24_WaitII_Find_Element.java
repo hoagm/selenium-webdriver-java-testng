@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 import java.util.List;
 
-public class Topic_24_Wait_PII_Find_Element {
+public class Topic_24_Wait_II_Find_Element {
 
     // 1- Setup: OS/ Web/ Browser/ Data/ Page...
     WebDriver driver;
