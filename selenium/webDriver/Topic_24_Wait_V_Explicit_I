@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class Topic_24_V_Explicit_I {
+public class Topic_24_Wait_V_Explicit_I {
 
     // 1- Setup: OS/ Web/ Browser/ Data/ Page...
     WebDriver driver;
