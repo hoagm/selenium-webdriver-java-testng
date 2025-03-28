@@ -21,13 +21,14 @@ public class Topic_24_Wait_V_Explicit_III {
     String projectPath = System.getProperty("user.dir");
     String uploadFilePath = projectPath + "\\uploadFiles\\";
 
-    String img1 = "01.jpg";
-    String img2 = "02.jpg";
-    String img3 = "03.jpg";
+    String cityName = "01.jpg";
+    String flowerName = "02.jpg";
+    String templeName = "03.jpg";
 
-    String img1Path = uploadFilePath + img1;
-    String img2Path = uploadFilePath + img2;
-    String img3Path = uploadFilePath + img3;
+    String cityPath = uploadFilePath + cityName;
+    String flowerPath = uploadFilePath + flowerName;
+    String templePath = uploadFilePath + templeName;
+
     @BeforeClass
     public void initialBrowser() {
         driver = new  ChromeDriver();
@@ -79,7 +80,7 @@ public class Topic_24_Wait_V_Explicit_III {
         explicitWait.until(ExpectedConditions.invisibilityOfAllElements(driver.findElements(By.cssSelector("div#index_loader"))));
 
         //  load file lên
-        driver.findElement(By.cssSelector("input[type='file']")).sendKeys(img1Path + "\n" + img2Path + "\n" + img3Path);
+        driver.findElement(By.cssSelector("input[type='file']")).sendKeys(cityPath + "\n" + flowerPath + "\n" + templePath);
 
         // wait icon loading dưới destination biến mất
         explicitWait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("span#destinationFolder")));
@@ -95,8 +96,14 @@ public class Topic_24_Wait_V_Explicit_III {
         String link = driver.findElement(By.cssSelector("a.linkSuccessCard")).getDomAttribute("href");
         driver.get(link);
 
+        // wait cho tất cả loading icon biến mất
+        explicitWait.until(ExpectedConditions.invisibilityOfAllElements(driver.findElements(By.cssSelector("div#index_loader"))));
 
-
+        //  wait visible text
+        explicitWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='truncate']/a[text()='" + cityName +"']")));
+        Assert.assertTrue(driver.findElement(By.xpath("//div[@class='truncate']/a[text()='"+ cityName+ "']")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath("//div[@class='truncate']/a[text()='"+ templeName+ "']")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath("//div[@class='truncate']/a[text()='"+ flowerName+ "']")).isDisplayed());
 
     }
 
